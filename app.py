@@ -278,7 +278,7 @@ def pobierz_token(client_id, client_secret, refresh_token):
         return response.json().get("access_token")
     return None
 
-def pobierz_aktywnosci(access_token, tygodnie=4):
+def pobierz_aktywnosci(access_token, tygodnie=12):
     data_od = int((datetime.now() - timedelta(weeks=tygodnie)).timestamp())
     response = requests.get(
         "https://www.strava.com/api/v3/athlete/activities",
@@ -328,7 +328,7 @@ Wygeneruj raport w następujących sekcjach:
 2. POSTĘPY - zidentyfikuj trendy i postępy na podstawie danych
 3. RYZYKO PRZECIĄŻENIA - oceń czy użytkownik nie trenuje za dużo lub za mało
 4. SŁABE PUNKTY - wskaż obszary wymagające poprawy
-5. PLAN NA 7 DNI - konkretny plan treningowy na kolejny tydzień (dzień po dniu)
+5. PLAN NA 30 DNI - konkretny plan treningowy na kolejny miesiąc (tydzień po tygodniu, z podziałem na dni)
 6. CEL TYGODNIOWY - jeden główny cel na nadchodzący tydzień
 7. REKOMENDACJE - 3 konkretne rekomendacje dopasowane do celu użytkownika
 8. OCENA CELU - oceń czy cel użytkownika jest realistyczny w kontekście jego aktywności
