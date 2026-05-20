@@ -452,7 +452,7 @@ if st.session_state.raport:
 
     sekcje = parsuj_sekcje(st.session_state.raport)
 
-if sekcje:
+    if sekcje:
         for nazwa, tresc in sekcje:
             st.markdown(f"**{nazwa}**")
             with st.expander("rozwiń", expanded=False):
