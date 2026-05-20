@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asystent treningowy AI — MOSTY AI 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #242424;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            padding: 60px 80px 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        h1 {
+            font-family: 'Share Tech Mono', monospace;
+            color: #FC4C02;
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-family: 'Share Tech Mono', monospace;
+            color: #FC4C02;
+            font-size: 36px;
+            margin-bottom: 32px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #FC4C02;
+        }
+
+        h3 {
+            font-family: 'Share Tech Mono', monospace;
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        p, li {
+            font-family: 'Rajdhani', sans-serif;
+            color: #eeeeee;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        a { color: #FC4C02; text-decoration: none; }
+
+        .card {
+            background-color: #333333;
+            border: 1px solid #444444;
+            border-radius: 10px;
+            padding: 24px 28px;
+        }
+
+        .card-orange {
+            border-left: 4px solid #FC4C02;
+            border-top: none;
+            border-right: none;
+            border-bottom: none;
+            background-color: #333333;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+
+        .badge {
+            display: inline-block;
+            background-color: #333333;
+            border: 1px solid #FC4C02;
+            color: #FC4C02;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .mosty-step {
+            background-color: #333333;
+            border: 1px solid #444444;
+            border-radius: 10px;
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .mosty-letter {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 44px;
+            color: #FC4C02;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .mosty-name {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            color: #FC4C02;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .flow-step {
+            background-color: #333333;
+            border: 1px solid #FC4C02;
+            border-radius: 8px;
+            padding: 14px 16px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .flow-step .icon { font-size: 24px; display: block; margin-bottom: 6px; }
+        .flow-step p { font-size: 13px; color: #bbbbbb; margin-top: 4px; }
+        .flow-arrow { color: #FC4C02; font-size: 24px; flex-shrink: 0; }
+
+        .metric {
+            background-color: #333333;
+            border: 1px solid #FC4C02;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 32px;
+            color: #FC4C02;
+            display: block;
+        }
+
+        .metric-label { font-size: 13px; color: #bbbbbb; margin-top: 6px; }
+
+        .subtitle { color: #aaaaaa; font-size: 20px; margin-bottom: 8px; }
+
+        .screenshot {
+            border: 1px solid #444444;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #333333;
+        }
+
+        .screenshot img { width: 100%; height: 180px; object-fit: cover; }
+
+        .screenshot-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            color: #aaaaaa;
+            padding: 8px 12px;
+            border-top: 1px solid #444444;
+        }
+
+        .link-big {
+            display: block;
+            background-color: #FC4C02;
+            color: #ffffff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 18px;
+            padding: 20px 32px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 24px 0;
+            letter-spacing: 1px;
+        }
+
+        .link-big:hover { background-color: #e04400; }
+
+        .bottom-note {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #444444;
+            color: #999999;
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        .why-card {
+            background-color: #333333;
+            border: 1px solid #FC4C02;
+            border-radius: 10px;
+            padding: 28px;
+            text-align: center;
+        }
+
+        .why-icon { font-size: 40px; display: block; margin-bottom: 12px; }
+
+        .why-title {
+            font-family: 'Share Tech Mono', monospace;
+            color: #FC4C02;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        /* ROADMAPA OS */
+        .roadmap {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .roadmap-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background-color: #FC4C02;
+            z-index: 0;
+        }
+
+        .roadmap-item:last-child::before { display: none; }
+
+        .roadmap-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #FC4C02;
+            border: 3px solid #FC4C02;
+            margin: 0 auto 12px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .roadmap-dot.done {
+            background-color: #FC4C02;
+        }
+
+        .roadmap-dot.todo {
+            background-color: #333333;
+            border-color: #FC4C02;
+            color: #FC4C02;
+        }
+
+        .roadmap-label {
+            font-family: 'Share Tech Mono', monospace;
+            color: #FC4C02;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .roadmap-desc {
+            font-size: 13px;
+            color: #bbbbbb;
+            padding: 0 8px;
+            line-height: 1.4;
+        }
+
+        .roadmap-tag {
+            display: inline-block;
+            background-color: #FC4C02;
+            color: #ffffff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+        }
+
+        .roadmap-tag.todo-tag {
+            background-color: #333333;
+            border: 1px solid #FC4C02;
+            color: #FC4C02;
+        }
+
+        /* NAV */
+        .nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #2e2e2e;
+            border-top: 1px solid #FC4C02;
+            padding: 12px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-info {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: #FC4C02;
+            text-align: center;
+        }
+
+        .nav-title { font-size: 11px; color: #666; margin-top: 2px; }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid #FC4C02;
+            color: #FC4C02;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 18px;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover { background-color: #FC4C02; color: #ffffff; }
+        .nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+        .nav-btn:disabled:hover { background-color: transparent; color: #FC4C02; }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background-color: #FC4C02;
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        .slide-title .logo {
+            width: 80px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="presentation">
+
+    <!-- SLAJD 1: TYTUŁ -->
+    <div class="slide slide-title active" id="slide-1">
+        <img src="AI_icon.png" alt="Logo" class="logo" onerror="this.style.display='none'">
+        <span class="badge">⚡ Projekt dyplomowy MOSTY AI 2026</span>
+        <h1>Asystent treningowy AI</h1>
+        <p class="subtitle">Jak w 4 krokach zbudowałam działający prototyp AI</p>
+        <p style="color:#666; font-size:16px; margin-top:16px;">Marta Ptaszyńska &nbsp;|&nbsp; 18 maja 2026</p>
+    </div>
+
+    <!-- SLAJD 2: MOSTY -->
+    <div class="slide" id="slide-2">
+        <h2>MOSTY AI — metodologia wdrażania AI</h2>
+        <p style="margin-bottom: 24px; color:#bbbbbb;">Warsztat online Liderzy.AI, kwiecień–maj 2026. Cel: nauczyć się jak wdrażać AI w organizacji — procesowo, nie tylko technicznie.</p>
+        <div class="grid-4">
+            <div class="mosty-step">
+                <span class="mosty-letter">M</span>
+                <span class="mosty-name">MAPUJ</span>
+                <p style="font-size:14px; color:#bbbbbb;">Potrzebę i procesy</p>
+            </div>
+            <div class="mosty-step">
+                <span class="mosty-letter">O</span>
+                <span class="mosty-name">ODKRYWAJ</span>
+                <p style="font-size:14px; color:#bbbbbb;">Rozwiązanie (PoC)</p>
+            </div>
+            <div class="mosty-step">
+                <span class="mosty-letter">S</span>
+                <span class="mosty-name">SPRAWDZAJ</span>
+                <p style="font-size:14px; color:#bbbbbb;">Wartość (PoV)</p>
+            </div>
+            <div class="mosty-step">
+                <span class="mosty-letter">T</span>
+                <span class="mosty-name">TRANSFORMUJ</span>
+                <p style="font-size:14px; color:#bbbbbb;">We wdrożenie (PoX)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLAJD 3: ZADANIE -->
+    <div class="slide" id="slide-3">
+        <h2>Projekt dyplomowy — zadanie i wybór tematu</h2>
+        <div class="grid-2" style="margin-bottom: 24px;">
+            <div class="card">
+                <h3>Wariant I</h3>
+                <p style="font-size:15px; margin-top:8px;">Rozszerzony prototyp systemu obsługi reklamacji (case study Home Style)</p>
+                <p style="font-size:13px; color:#666; margin-top:8px;">Wymagania min: karta procesu + prototyp</p>
+            </div>
+            <div class="card card-orange">
+                <h3 style="color:#FC4C02;">Wariant II</h3>
+                <p style="font-size:15px; margin-top:8px;">Własny proces biznesowy</p>
+                <p style="font-size:13px; color:#888; margin-top:8px;">Wymagania rozszerzone: karta procesu + kwestionariusz Excel + prototyp + dokumentacja</p>
+            </div>
+        </div>
+        <div class="grid-3">
+            <div class="why-card">
+                <span class="why-icon">🏊</span>
+                <p class="why-title">Hobby</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">💡</span>
+                <p class="why-title">Zapotrzebowanie własne</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">😄</span>
+                <p class="why-title">Just for fun</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLAJD 4: CO ZBUDOWAŁAM -->
+    <div class="slide" id="slide-4">
+        <h2>Co zbudowałam?</h2>
+        <div class="grid-2">
+            <div class="card card-orange">
+                <h3>📋 Karta procesu</h3>
+                <ul style="margin-top: 12px;">
+                    <li>Analiza SIPOC</li>
+                    <li>Macierz RACI</li>
+                    <li>Opis kroków procesu (STEP-001 do STEP-003)</li>
+                    <li>Punkt decyzyjny</li>
+                    <li>Ścieżki alternatywne i obsługa wyjątków</li>
+                    <li>KPI i miary operacyjne</li>
+                    <li>Analiza ryzyk</li>
+                    <li>Diagram procesu TO-BE (BPMN 2.0 w draw.io)</li>
+                </ul>
+            </div>
+            <div class="card card-orange">
+                <h3>🤖 Prototyp aplikacji</h3>
+                <ul style="margin-top: 12px;">
+                    <li>Stack: Python + Streamlit</li>
+                    <li>Integracja: Strava API + Gemini API</li>
+                    <li>Prompt engineering z guardrails</li>
+                    <li>Raport AI w 8 sekcjach</li>
+                    <li>Obsługa błędów i wyjątków</li>
+                    <li>Dostępna online</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLAJD 5: JAK DZIAŁA -->
+    <div class="slide" id="slide-5">
+        <h2>Jak działa asystent treningowy AI?</h2>
+        <div class="flow">
+            <div class="flow-step">
+                <span class="icon">🔑</span>
+                <h3>Dane dostępowe</h3>
+                <p>Strava API + Gemini API Key</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <span class="icon">📡</span>
+                <h3>Pobierz dane</h3>
+                <p>Historia aktywności z ostatnich 4 tygodni</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <span class="icon">🎯</span>
+                <h3>Określ cel</h3>
+                <p>Cel treningowy + liczba dni</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <span class="icon">🤖</span>
+                <h3>Analiza AI</h3>
+                <p>Gemini 2.5 Flash analizuje dane</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <span class="icon">📊</span>
+                <h3>Raport</h3>
+                <p>8 sekcji + plan na 7 dni</p>
+            </div>
+        </div>
+        <div class="grid-4" style="margin-top: 28px;">
+            <div class="metric"><span class="metric-value">8</span><div class="metric-label">Sekcji w raporcie AI</div></div>
+            <div class="metric"><span class="metric-value">4 tyg.</span><div class="metric-label">Zakres danych</div></div>
+            <div class="metric"><span class="metric-value">3</span><div class="metric-label">Obsługiwane wyjątki</div></div>
+            <div class="metric"><span class="metric-value">&lt;30s</span><div class="metric-label">Cel: czas generowania</div></div>
+        </div>
+    </div>
+
+    <!-- SLAJD 6: DEMO -->
+    <div class="slide" id="slide-6">
+        <h2>Demo na żywo</h2>
+        <a class="link-big" href="https://2026mostyai-asystent-treningowy-ai.streamlit.app" target="_blank">
+            ▶ 2026mostyai-asystent-treningowy-ai.streamlit.app
+        </a>
+        <div class="grid-3">
+            <div class="screenshot">
+                <img src="https://raw.githubusercontent.com/martaoliwiaptaszynska/2026MOSTYAI_asystent-treningowy-ai/main/Snip01.png" alt="Widok aplikacji 1">
+                <div class="screenshot-label">Ogólny widok aplikacji</div>
+            </div>
+            <div class="screenshot">
+                <img src="https://raw.githubusercontent.com/martaoliwiaptaszynska/2026MOSTYAI_asystent-treningowy-ai/main/Snip02.png" alt="Widok aplikacji 2">
+                <div class="screenshot-label">Widok raportu</div>
+            </div>
+            <div class="screenshot">
+                <img src="https://raw.githubusercontent.com/martaoliwiaptaszynska/2026MOSTYAI_asystent-treningowy-ai/main/Snip03.png" alt="Obsługa błędu">
+                <div class="screenshot-label">Obsługa błędu limitu API</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLAJD 7: WIĘCEJ NIŻ CHATBOT -->
+    <div class="slide" id="slide-8">
+        <h2>Więcej niż chatbot</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+            <div class="card card-orange">
+                <h3>🧠 Procesy + AI</h3>
+                <p style="font-size:15px; margin-top:8px;">AI mapuje procesy, wykrywa problemy i projektuje usprawnienia — nie tylko pisze teksty.</p>
+            </div>
+            <div class="card card-orange">
+                <h3>📄 Dokumentacja z AI</h3>
+                <p style="font-size:15px; margin-top:8px;">Karty procesów, SIPOC, BPMN, wymagania generowane z rozmów, transkrypcji i materiałów źródłowych.</p>
+            </div>
+            <div class="card card-orange">
+                <h3>🤖 Agenci AI</h3>
+                <p style="font-size:15px; margin-top:8px;">Wyspecjalizowani agenci wspierający różne role — analityk, architekt, walidator, użytkownik.</p>
+            </div>
+            <div class="card card-orange">
+                <h3>📚 Wiedza firmowa w AI</h3>
+                <p style="font-size:15px; margin-top:8px;">Łączenie LLM z dokumentacją i procedurami organizacji, żeby odpowiedzi były konkretne i użyteczne.</p>
+            </div>
+            <div class="card card-orange">
+                <h3>🎥 Multimodalność</h3>
+                <p style="font-size:15px; margin-top:8px;">Praca z PDF, obrazami i nagraniami wideo — np. analiza procesu na podstawie rozmowy z biznesem.</p>
+            </div>
+            <div class="card card-orange">
+                <h3>🛡️ Guardrails i ewaluacja</h3>
+                <p style="font-size:15px; margin-top:8px;">Jak ograniczać halucynacje, testować jakość odpowiedzi i budować rozwiązania AI przewidywalnie.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLAJD 9: CO DALEJ -->
+    <div class="slide" id="slide-9">
+        <h2>Co dalej z projektem — T z MOSTY</h2>
+        <div class="roadmap">
+            <div class="roadmap-item">
+                <span class="roadmap-tag">✓ gotowe</span>
+                <div class="roadmap-dot done">1</div>
+                <div class="roadmap-label">PoC</div>
+                <div class="roadmap-desc">Prototyp działa, testy przeprowadzone, dokumentacja gotowa</div>
+            </div>
+            <div class="roadmap-item">
+                <span class="roadmap-tag todo-tag">kolejny krok</span>
+                <div class="roadmap-dot todo">2</div>
+                <div class="roadmap-label">Walidacja</div>
+                <div class="roadmap-desc">Model-as-a-judge, testy z użytkownikami, pomiar KPI</div>
+            </div>
+            <div class="roadmap-item">
+                <span class="roadmap-tag todo-tag">kolejny krok</span>
+                <div class="roadmap-dot todo">3</div>
+                <div class="roadmap-label">MVP</div>
+                <div class="roadmap-desc">Architektura produkcyjna, bezpieczeństwo kluczy API, retry</div>
+            </div>
+            <div class="roadmap-item">
+                <span class="roadmap-tag todo-tag">kolejny krok</span>
+                <div class="roadmap-dot todo">4</div>
+                <div class="roadmap-label">Wdrożenie</div>
+                <div class="roadmap-desc">Onboarding, dokumentacja dla użytkowników, monitoring</div>
+            </div>
+            <div class="roadmap-item">
+                <span class="roadmap-tag todo-tag">kolejny krok</span>
+                <div class="roadmap-dot todo">5</div>
+                <div class="roadmap-label">Rozwój</div>
+                <div class="roadmap-desc">Dane historyczne, integracja z kalendarzem, nowe funkcje</div>
+            </div>
+        </div>
+        <p class="bottom-note" style="margin-top:32px;">Projekt pokazał że AI można wdrażać iteracyjnie — małymi krokami, z procesem, bez wielkiego budżetu.</p>
+    </div>
+
+    <!-- SLAJD 9: WNIOSKI -->
+    <div class="slide" id="slide-9">
+        <h2>Co mi dało MOSTY AI?</h2>
+        <div class="grid-4">
+            <div class="card card-orange">
+                <h3>🗺️ Myślenie procesowe</h3>
+                <p style="font-size:15px; margin-top:8px;">Wypełnienie karty procesu zmusiło mnie do przemyślenia rzeczy, które przy samym kodowaniu bym pominęła.</p>
+            </div>
+            <div class="card card-orange">
+                <h3>🚀 Niski próg wejścia</h3>
+                <p style="font-size:15px; margin-top:8px;">Nie trzeba być developerem żeby zacząć. Im bardziej się zagłębiasz — tym bardziej rozszerzają się perspektywy.</p>
+            </div>
+            <div class="card card-orange">
+                <h3>🔁 Iteracyjność</h3>
+                <p style="font-size:15px; margin-top:8px;">Prompt engineering to nie jednorazowy strzał. Każda iteracja zmniejszała halucynacje i poprawiała jakość rekomendacji.</p>
+            </div>
+            <div class="card card-orange">
+                <h3>🤖 Przekrój zastosowań AI</h3>
+                <p style="font-size:15px; margin-top:8px;">Od agenta zasilanego wiedzą szkoleniową, przez generowanie BPMN/PlantUML, po mapowanie procesu z nagrania wideo.</p>
+            </div>
+        </div>
+        <p class="bottom-note">Metodologia MOSTY sprawdza się nie tylko w dużych wdrożeniach — działa też dla małych PoC i projektów hobbystycznych.</p>
+    </div>
+
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Wstecz</button>
+    <div class="nav-info">
+        <div id="slideCounter">1 / 9</div>
+        <div class="nav-title" id="slideTitle">Asystent treningowy AI</div>
+    </div>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Dalej →</button>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const titles = [
+        'Tytuł',
+        'MOSTY AI — metodologia',
+        'Zadanie i wybór tematu',
+        'Co zbudowałam?',
+        'Jak działa?',
+        'Demo na żywo',
+        'Więcej niż chatbot',
+        'Co dalej — T z MOSTY',
+        'Co mi dało MOSTY AI?'
+    ];
+    let current = 0;
+
+    function changeSlide(dir) {
+        slides[current].classList.remove('active');
+        current += dir;
+        if (current < 0) current = 0;
+        if (current >= slides.length) current = slides.length - 1;
+        slides[current].classList.add('active');
+        updateNav();
+    }
+
+    function updateNav() {
+        document.getElementById('slideCounter').textContent = (current + 1) + ' / ' + slides.length;
+        document.getElementById('slideTitle').textContent = titles[current];
+        document.getElementById('prevBtn').disabled = current === 0;
+        document.getElementById('nextBtn').disabled = current === slides.length - 1;
+        document.getElementById('progressBar').style.width = ((current + 1) / slides.length * 100) + '%';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+    });
+
+    updateNav();
+</script>
+
+</body>
+</html>
