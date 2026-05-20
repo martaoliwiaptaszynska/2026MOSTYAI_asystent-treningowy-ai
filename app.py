@@ -516,12 +516,6 @@ if st.session_state.dane_pobrane and st.session_state.metryki:
 
     st.divider()
 
-    with st.expander("Zobacz pobrane dane — wersja tekstowa dla AI"):
-        st.text(st.session_state.dane)
-
-    with st.expander("Zobacz pobrane dane — wersja JSON"):
-        st.json(st.session_state.dane_json)
-
     st.download_button(
         label="Pobierz pobrane dane jako JSON",
         data=json.dumps(st.session_state.dane_json, ensure_ascii=False, indent=2),
