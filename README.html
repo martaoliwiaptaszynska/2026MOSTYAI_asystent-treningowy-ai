@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README — Asystent treningowy AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        header {
+            border-bottom: 2px solid #FC4C02;
+            padding: 32px 48px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background-color: #0f0f0f;
+        }
+
+        header img {
+            width: 80px;
+            border-radius: 16px;
+        }
+
+        header .title-block h1 {
+            font-family: 'Share Tech Mono', monospace;
+            color: #FC4C02;
+            font-size: 32px;
+            letter-spacing: 1px;
+        }
+
+        header .title-block p {
+            color: #aaaaaa;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #1a1a1a;
+            border: 1px solid #FC4C02;
+            color: #FC4C02;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 48px 120px;
+        }
+
+        h2 {
+            font-family: 'Share Tech Mono', monospace;
+            color: #FC4C02;
+            font-size: 20px;
+            margin: 40px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+
+        h3 {
+            font-family: 'Share Tech Mono', monospace;
+            color: #ffffff;
+            font-size: 15px;
+            margin: 24px 0 8px;
+        }
+
+        p {
+            color: #cccccc;
+            margin-bottom: 12px;
+        }
+
+        a {
+            color: #FC4C02;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+
+        .card-orange {
+            border-left: 4px solid #FC4C02;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .step-number {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: #FC4C02;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-content h3 {
+            margin: 0 0 4px;
+            font-size: 15px;
+        }
+
+        .step-content p {
+            margin: 0;
+            font-size: 14px;
+            color: #aaaaaa;
+        }
+
+        code {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            color: #FC4C02;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        pre {
+            background-color: #1a1a1a;
+            border: 1px solid #FC4C02;
+            border-radius: 8px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 13px;
+            color: #ffffff;
+        }
+
+        .warning {
+            background-color: #1a1a1a;
+            border: 1px solid #FC4C02;
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: #FC4C02;
+            font-size: 14px;
+            margin: 16px 0;
+        }
+
+        .warning strong {
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .metric {
+            background-color: #1a1a1a;
+            border: 1px solid #FC4C02;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 24px;
+            color: #FC4C02;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-top: 4px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: #cccccc;
+            margin-bottom: 12px;
+        }
+
+        ul li {
+            margin-bottom: 6px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #1a1a1a;
+            border-top: 1px solid #FC4C02;
+            padding: 10px 24px;
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: #FC4C02;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="AI_icon.png" alt="Logo Asystenta treningowego AI">
+    <div class="title-block">
+        <h1>Asystent treningowy AI</h1>
+        <p>Analiza danych Strava + rekomendacje Gemini</p>
+        <span class="badge">⚡ Projekt dyplomowy MOSTY AI — Marta Ptaszyńska</span>
+    </div>
+</header>
+
+<main>
+
+    <h2>O projekcie</h2>
+    <div class="card card-orange">
+        <p>Prototyp aplikacji AI wspierającej użytkownika w analizie danych treningowych ze Stravy i generowaniu spersonalizowanego planu treningowego na kolejny tydzień. Projekt zrealizowany w metodologii MOSTY AI.</p>
+        <p style="margin-bottom:0">Model AI: <code>gemini-2.5-flash</code> &nbsp;|&nbsp; Stack: <code>Python + Streamlit</code> &nbsp;|&nbsp; Dane: <code>Strava API</code></p>
+    </div>
+
+    <div class="grid-2">
+        <div class="metric">
+            <div class="metric-value">8</div>
+            <div class="metric-label">Sekcji w raporcie AI</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">4 tyg.</div>
+            <div class="metric-label">Zakres danych treningowych</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">3</div>
+            <div class="metric-label">Obsługiwane wyjątki (W1-W3)</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">&lt;30s</div>
+            <div class="metric-label">Cel: czas generowania raportu</div>
+        </div>
+    </div>
+
+    <h2>Wymagania</h2>
+    <div class="card">
+        <ul>
+            <li>Python 3.9 lub nowszy</li>
+            <li>Konto Strava z historią aktywności</li>
+            <li>Klucz Strava Developer API (<a href="https://www.strava.com/settings/api" target="_blank">strava.com/settings/api</a>)</li>
+            <li>Klucz Gemini API, model <code>gemini-2.5-flash</code> (<a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a>)</li>
+        </ul>
+    </div>
+
+    <div class="warning">
+        <strong>⚠ WAŻNE:</strong> Darmowy tier Gemini API pozwala na 5 zapytań/min i ok. 25 zapytań/dzień. Odczekaj chwilę między kolejnymi analizami. Jeśli pojawi się błąd 429 — poczekaj 30 sekund i spróbuj ponownie.
+    </div>
+
+    <h2>Instalacja i uruchomienie</h2>
+
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h3>Zainstaluj wymagane biblioteki</h3>
+            <p>Otwórz terminal i wpisz:</p>
+        </div>
+    </div>
+    <pre><code>pip3 install streamlit google-generativeai requests pillow</code></pre>
+
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h3>Przejdź do folderu z aplikacją</h3>
+        </div>
+    </div>
+    <pre><code>cd ścieżka/do/folderu/z/app.py</code></pre>
+
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h3>Uruchom aplikację</h3>
+        </div>
+    </div>
+    <pre><code>streamlit run app.py</code></pre>
+
+    <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+            <h3>Otwórz w przeglądarce</h3>
+            <p>Aplikacja uruchomi się automatycznie pod adresem <code>http://localhost:8501</code></p>
+        </div>
+    </div>
+
+    <h2>Jak uzyskać klucze API</h2>
+
+    <h3>🚴 Strava API</h3>
+    <div class="card">
+        <ol style="padding-left:20px; color:#cccccc">
+            <li>Wejdź na <a href="https://www.strava.com/settings/api" target="_blank">strava.com/settings/api</a></li>
+            <li>Utwórz aplikację (nazwa dowolna, callback: <code>localhost</code>)</li>
+            <li>Skopiuj <strong>Client ID</strong> i <strong>Client Secret</strong></li>
+            <li>Autoryzuj aplikację przez URL:<br>
+                <code>https://www.strava.com/oauth/authorize?client_id=TWOJ_ID&response_type=code&redirect_uri=http://localhost&approval_prompt=force&scope=activity:read_all</code>
+            </li>
+            <li>Z adresu po przekierowaniu skopiuj parametr <code>code=...</code></li>
+            <li>Wymień kod na Refresh Token komendą w terminalu:<br>
+                <code>curl -X POST https://www.strava.com/oauth/token -d client_id=ID -d client_secret=SECRET -d code=KOD -d grant_type=authorization_code</code>
+            </li>
+            <li>Skopiuj wartość <code>refresh_token</code> z odpowiedzi</li>
+        </ol>
+    </div>
+
+    <h3>🤖 Gemini API</h3>
+    <div class="card">
+        <ol style="padding-left:20px; color:#cccccc">
+            <li>Wejdź na <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></li>
+            <li>Zaloguj się kontem Google</li>
+            <li>Utwórz nowy projekt i kliknij <strong>Create API Key</strong></li>
+            <li>Skopiuj klucz — wymagany model: <code>gemini-2.5-flash</code></li>
+        </ol>
+    </div>
+
+    <h2>Zawartość paczki</h2>
+    <div class="card">
+        <ul>
+            <li><code>README.html</code> — ten plik</li>
+            <li><code>app.py</code> — główny kod aplikacji Streamlit</li>
+            <li><code>AI_icon.png</code> — logo aplikacji (musi być w tym samym folderze co app.py)</li>
+            <li><code>process_tobe.drawio</code> — diagram procesu TO-BE (draw.io)</li>
+            <li><code>Karta Procesu - Asystent treningowy AI dla użytkowników Strava.pdf</code> — wypełniona karta procesu MOSTY AI</li>
+            <li><code>Snip01, Snip02, Snip03</code> — przykładowe zrzuty ekranu frontendu <code>app.py</code> </li>
+            <li><code>Raport_Treningowy_Cel_ pływanie_100m_poniżej_2_30.txt</code> — przykładowy raport wygenerowany za pomocą <code>app.py</code> </li>
+
+        </ul>
+    </div>
+
+    <h2>Funkcjonalności</h2>
+    <div class="card card-orange">
+        <ul>
+            <li>Pobieranie historii aktywności ze Strava API (ostatnie 4 tygodnie)</li>
+            <li>Analiza AI: poziom aktywności, postępy, ryzyko przeciążenia, słabe punkty</li>
+            <li>Generowanie planu treningowego na 7 dni dopasowanego do celu użytkownika</li>
+            <li>Obsługa błędów API (W1: błędny token, W2: brak danych, W3: błędny klucz Gemini)</li>
+            <li>Guardrail: odrzucanie celów niesportowych</li>
+            <li>Pobieranie raportu jako plik TXT</li>
+            <li>Ciemny motyw z pomarańczowymi akcentami</li>
+        </ul>
+    </div>
+
+    <div class="warning">
+        <strong>⚠ PRYWATNOŚĆ:</strong> Aplikacja nie zapisuje żadnych danych. Klucze API i dane treningowe są aktywne tylko podczas sesji i nie są logowane ani przechowywane.
+    </div>
+
+</main>
+
+<footer>
+    ⚡ Prototyp — Projekt dyplomowy MOSTY AI | Asystent treningowy AI | Strava + Gemini | Wykonanie: Marta Ptaszyńska
+</footer>
+
+</body>
+</html>
+```
